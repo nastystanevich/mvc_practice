@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Orders List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    
+</head>
+<body>
+    <div id="wrapper">
+        <aside class="all-orders">
+            <header class="aside-header">
+                <span class="icon" id="back">
+                    <i class="fas fa-angle-left"></i>
+                </span>
+                <span class="title">Orders(<span class="amount"></span>)
+                </span>
+            </header>
+            <div class="search-box" id="order-search">
+                <input id="js-order-input" placeholder="Поиск"
+                title="Enter an order name or a part of it.">
+                <div class="icons">
+                    <span class="icon search" id="js-search-order">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <span class="icon update" id="js-update-orders">
+                        <i class="fas fa-sync-alt"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="blank-content aside hidden">No orders</div>
+            <nav id="aside-content">
+                <ol>
+                <li class="order hidden" data-id="0">
+                    <div class="title"></div>
+                    <div class="date"></div>
+                    <div class="customer"></div>
+                    <div class="status"></div>
+                    <div class="shipped"></div>
+                </li>
+            </ol>
+            </nav>
+            <footer class="aside-footer">
+                <span class="icon footer-icon" id="js-add-order">
+                    <i class="fas fa-plus"></i>
+                </span>
+            </footer>
+        </aside>
+
+        <main>
+            <header class="main-header">
+                <span class="icon" id="aside">
+                    <i class="fas fa-bars"></i>
+                </span>
+                Order
+            </header>
+            <div class="blank-content main">
+                    No order selected
+            </div>
+            <div class="main-content">
+                <section class="order-information">
+                    <div class="main">
+                        <div class="title">Order
+                            <span class="number"></span>
+                        </div>
+                        <div class="price-block">
+                            <div class="price"></div>
+                            <div class="currency"></div>
+                        </div>
+                    </div>
+                    <div class="additional">
+                        <div>
+                            <label>Customer</label>
+                            <span class="customer"></span>
+                        </div>
+                        <div>
+                            <label>Ordered</label>
+                            <span class="date"></span>
+                        </div>
+                        <div>
+                            <label>Shipped</label>
+                            <span class="shipped-date"></span>
+                        </div>
+                    </div>
+                    <div class="tabs-bar">
+                        <div>
+                            <button data-id="ship-tab" class="tab active" title="Shipping Address">
+                                <i class="fas fa-truck"></i>
+                            </button>
+                        </div>
+                        <div>
+                            <button data-id="customer-tab" class="tab" title="Processor">
+                                <i class="far fa-user"></i>
+                            </button>
+                        </div>
+                        <div>
+                            <button data-id="map-tab" class="tab" title="Map">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                <section class="tab-information" id="ship-info">
+                    <div class="tab-header">
+                        <h1>Shipping Address</h1>
+                        <div class="edit-buttons">
+                            <div class="edit">Edit</div>
+                            <div class="save hidden">Save</div>
+                            <div class="cancel hidden">Cancel</div>
+                        </div> 
+                    </div>
+                    <table id="shipping-table">
+                        <tr>
+                            <td>
+                                <label>Name</label>
+                            </td>
+                            <td class="editable">
+                                <span class="name"></span>
+                                <input class="hidden" data-id="name">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Street</label>
+                            </td>
+                            <td class="editable">
+                                <span class="street"></span>
+                                <input class="hidden" data-id="street">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>ZIP Code/City</label>
+                            </td>
+                            <td class="editable">
+                                <span class="zip"></span>
+                                <input class="hidden" data-id="zip">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Region</label>
+                            </td>
+                            <td class="editable">
+                                <span class="region"></span>
+                                <input class="hidden" data-id="region">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Country</label>
+                            </td>
+                            <td class="editable">
+                                <span class="country"></span>
+                                <input class="hidden" data-id="country">
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+                <section class="tab-information  hidden" id="customer-info">
+                    <div class="tab-header">
+                        <h1>Customer</h1>
+                        <div class="edit-buttons">
+                            <div class="edit">Edit</div>
+                            <div class="save hidden">Save</div>
+                            <div class="cancel hidden">Cancel</div>
+                        </div>
+                    </div>
+                    <table id="customer-table">
+                        <tr>
+                            <td>
+                                <label>First name</label>
+                            </td>
+                            <td class="editable">
+                                <span class="firstName"></span>
+                                <input class="hidden" data-id="firstName">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Last Name</label>
+                            </td>
+                            <td class="editable">
+                                <span class="lastName"></span>
+                                <input class="hidden" data-id="lastName">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Address</label>
+                            </td>
+                            <td class="editable">
+                                <span class="address"></span>
+                                <input class="hidden" data-id="address">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Phone</label>
+                            </td>
+                            <td class="editable">
+                                <span class="phone"></span>
+                                <input class="hidden" data-id="phone">                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Email</label>
+                            </td>
+                            <td class="editable">
+                                <span class="email"></span>
+                                <input class="hidden" data-id="email">
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+                <section class="tab-information  hidden" id="map-info">
+                    <img id="map">
+                </section>
+                <section class="products">
+                    <h1>Line Items(<span class="items-amount"></span>)
+                    </h1>
+                    <div class="items-controls">
+                        <div class="search-box" id="item-search">
+                            <input id="js-item-input" placeholder="Поиск">
+                            <div class="icons">
+                                <span class="icon search"  id="js-search-item">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                                <span class="icon update"  id="js-update-items">
+                                    <i class="fas fa-sync-alt"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span class="icon" id="js-add-item">
+                                <i class="fas fa-plus"></i>
+                        </span>
+                    </div>
+                    
+                     <table id="products-list">
+                             <tr id="thead">
+                                <th data-id="0">Product
+                                    <span class="icon">
+                                        <i class="fas fa-sort"></i>
+                                    </span>
+                                </th>
+                                <th data-id="1">Unit Price
+                                    <span class="icon">
+                                        <i class="fas fa-sort"></i>
+                                    </span>
+                                </th>
+                                <th data-id="2">Quantity
+                                    <span class="icon">
+                                        <i class="fas fa-sort"></i>
+                                    </span>
+                                </th>
+                                <th data-id="3">Toatal
+                                    <span class="icon">
+                                        <i class="fas fa-sort"></i>
+                                    </span>
+                                </th>
+                                <th></th>
+                            </tr>
+                         
+                            <tr class="item" data-id="">
+                                <td>
+                                    <span class="product-name"></span>
+                                    <div class="index"></div></td>
+                                <td>
+                                    <span class="u-price"></span>
+                                    <span class="currency"></span>
+                                </td>
+                                <td><span class="quantity"></span></td>
+                                <td>
+                                    <span class="total-price"></span>
+                                    <span class="currency"></span>
+                                </td>
+                                <td>
+                                    <span class="icon fas fa-trash-alt" id="js-delete-product">
+                                    </span>
+                                </td>
+                            </tr>
+                        
+                         
+                     </table>
+                    
+                    <div class="modal closed" id="item-modal">
+                        <h1>New Product</h1>
+                        <small>Enter product's properties</small>
+                        <small class="invalid-message">All fields should be filled in</small>
+                        <span class="icon close fas fa-times"></span>
+                                
+                        <input class="is-invalid name" placeholder="name" type="text"/>
+                        <input class="is-invalid price" placeholder="price" type="number"/>
+                        <input class="is-invalid quantity" placeholder="quantity" type="number"/>
+                        <button class="formBtn" id="js-save-item" disabled>Save</button>
+                    </div>
+                    
+                </section>
+                
+            </div>
+           
+            <footer class="main-footer">
+                <span class="icon footer-icon" id="js-delete-order">
+                    <i class="fas fa-trash-alt"></i>
+                    <span>Delete Order</span>
+                </span>
+                
+            </footer>
+        </main>
+        <div class="modal closed" id="order-modal-summary">
+                <h1>New Order</h1>
+                <small>Enter order's properties</small>
+                <small class="invalid-message">All fields should be filled in</small>
+                <span class="icon close fas fa-times"></span>
+                
+                    <label for="created">Date of create</label>
+                    <input class="is-invalid" id="created" type="date">
+                    <label for="customer">Customer</label>
+                    <input class="is-invalid" id="customer" type="text">
+                    <label for="status">Select status</label>
+                    <select id="status">
+                        <option selected value="accepted">Accepted</option>
+                        <option value="pending">Pending</option>
+                        <option value="late">Late</option>
+                    </select>
+                    <label for="shiped">Date of shiping</label>
+                    <input class="is-invalid" id="shiped" type="date">
+                    <label for="currency">Select currency</label>
+                    <select id="currency">
+                        <option selected value="EUR">EUR</option>
+                        <option value="USD">USD</option>
+                        <option value="BYN">BYN</option>
+                    </select>
+
+                    <button class="formBtn" id="summary-next-step" disabled>Next</button>
+        </div>
+
+        <div class="modal" id="order-modal-ship-to">
+            <h1>Shipping Information</h1>
+            <small class="invalid-message">All fields should be filled in</small>
+            <span class="icon close fas fa-times"></span>
+
+            <label for="name">Name</label>
+            <input class="is-invalid" id="name" type="text">
+            <label for="address">Address</label>
+            <input class="is-invalid" id="address" type="text">
+            <label for="zip">ZIP</label>
+            <input class="is-invalid" id="zip" type="number">
+            <label for="region">Region</label>
+            <input class="is-invalid" id="region" type="text">
+            <label for="country">Country</label>
+            <input class="is-invalid" id="country" type="text">
+                    
+            <button class="formBtn" id="ship-next-step" disabled>Next</button>
+        </div>
+        <div class="modal" id="order-modal-customer">
+            <h1>Customer Information</h1>
+            <small class="invalid-message">All fields should be filled in</small>
+            <span class="icon close fas fa-times"></span>
+
+            <label for="first-name">First Name</label>
+            <input class="is-invalid" id="first-name" type="text">
+            <label for="last-name">Last Name</label>
+            <input class="is-invalid" id="last-name" type="text">
+            <label for="address">Address</label>
+            <input class="is-invalid" id="address" type="text">
+            <label for="phone">Phone</label>
+            <input class="is-invalid" id="phone" type="tel">
+            <label for="email">Email</label>
+            <input class="is-invalid" id="email" type="email">
+                        
+            <button class="formBtn" id="js-save-order" disabled>Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/view.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/controller.js"></script>
+</body>
+</html>
